@@ -1,18 +1,29 @@
 #include <stdio.h>
 
-#include EOF 0
+#define IN 1   //inside a word
+#define OUT 2  // out a word
 
+/* count lines,words and characters  */
 int main()
 {
-	int c ;
+	int c, nl, nw, nc, state ;
 
-	while((c = getchar()) != EOF){
-		putchar(c);
+	state = OUT ;
+	nl = nw = nc = 0 ;
+	while ((c = getchar()) != EOF ){
+		++nc;
+		if (c == '\n'){
+			++nl ;
+		}
+
+		if (c == ' ' || c == '\n' || c == '\t'){
+			state = OUT;
+		}
+
+		else if (state == OUT) {
+			state = IN ;
+			++nw;
+		}
 	}
+	printf("%d %d %d\n",nl,nw,nc);
 }
-
-
-/* type ctrl-D to provoke a "end-of-file"
- then after all the input has be read,getchar() will return EOF,
- and hence getchar() != EOF will be false, and the loop'll
- terminate */
