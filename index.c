@@ -1,17 +1,18 @@
 #include <stdio.h>
 
-// print Fahrenheit-Celsius table
-
-#define		LOWER  0 /* lower limit of temperature table*/
-#define		UPPER  300 /* upper limite */	
-#define		STEP  20 /*step size*/
+#include EOF 0
 
 int main()
 {
-	int fahr;
-	for (fahr = LOWER;fahr <=UPPER; fahr = fahr + STEP)
-		printf("%3d %6.1f \n", fahr, (5.0/9.0) * (fahr-32) );
+	int c ;
 
+	while((c = getchar()) != EOF){
+		putchar(c);
+	}
 }
 
 
+/* type ctrl-D to provoke a "end-of-file"
+ then after all the input has be read,getchar() will return EOF,
+ and hence getchar() != EOF will be false, and the loop'll
+ terminate */
