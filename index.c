@@ -1,29 +1,12 @@
 #include <stdio.h>
 
-#define IN 1   //inside a word
-#define OUT 2  // out a word
-
-/* count lines,words and characters  */
 int main()
 {
-	int c, nl, nw, nc, state ;
-
-	state = OUT ;
-	nl = nw = nc = 0 ;
-	while ((c = getchar()) != EOF ){
-		++nc;
-		if (c == '\n'){
-			++nl ;
-		}
-
-		if (c == ' ' || c == '\n' || c == '\t'){
-			state = OUT;
-		}
-
-		else if (state == OUT) {
-			state = IN ;
-			++nw;
-		}
-	}
-	printf("%d %d %d\n",nl,nw,nc);
+	int c;
+	// reads the next input character from a textstring and return as its value
+	c = getchar();
+	// print the content of the variable as character
+	printf("\n Entered character is: ");
+	putchar(c);
+	printf("\n");
 }
