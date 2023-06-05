@@ -1,29 +1,29 @@
 #include <stdio.h>
 
-
 #define IN 1 /* inside a word */
 #define OUT 0 /* outside a word/space,tab etc  */
-//count lines,words, and characters in input
+
+//A program that prints its input one word per line
+
 int main()
 {
-	int c ,nl, nw, nc,state;
+	int c , state ;
 	state = OUT ;
-	nl = nw = nc = 0;
-	while((c = getchar()) != EOF) {
-// everytime this loop pass through a character nc will count a letter
-		++nc;
-		// detect a newline and increment
-		if (c == '\n')
-			++nl;
-		// detect a spacebar, tab or newline and change the state
-		if (c == ' ' || c == '\n' || c == '\t'){
-			state = OUT ;
+
+	while((c = getchar()) != EOF)
+	{
+		if (c == ' '|| c == '\n'|| c== '\t')
+		{
+			state = OUT;
+			printf("\n");
 		}
-		//this will revert the stage to "inside a word" and increment nw-var
-		else if (state == OUT) {
-			state = IN ;
-			++nw;
+		else
+		{
+
+			state = IN;
+			putchar(c);
 		}
 	}
-	printf("\n%d %d %d\n",nl,nw,nc);
+
+	printf("%d ",state);
 }
