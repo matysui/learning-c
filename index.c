@@ -1,11 +1,16 @@
 #include <stdio.h>
 
-//count the caracters in input ; 1st edition
+//count lines in input
 int main()
 {
-	long nc = 0;
-	while ( getchar() != EOF){
-		++nc;
-		printf("%ld\n",nc);
+	int c ,nl;
+	nl = 0 ;
+
+	while ((c = getchar()) != EOF){
+		//everytime you press enter/'\n' this will happen
+		if (c == '\n'){
+			++nl;
+		}
 	}
+	printf("%d\n",nl);
 }
