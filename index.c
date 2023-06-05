@@ -1,12 +1,11 @@
 #include <stdio.h>
 
+//count the caracters in input ; 1st edition
 int main()
 {
-	int c ;
-	c = getchar();
-	// this loop will pass by each letter of textstream
-	while(c != EOF){
-		putchar(c);
-		c = getchar();
+	long nc = 0;
+	while ( getchar() != EOF){
+		++nc;
+		printf("%ld\n",nc);
 	}
 }
