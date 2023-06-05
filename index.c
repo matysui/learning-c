@@ -2,11 +2,11 @@
 
 int main()
 {
-	int c;
-	// reads the next input character from a textstring and return as its value
+	int c ;
 	c = getchar();
-	// print the content of the variable as character
-	printf("\n Entered character is: ");
-	putchar(c);
-	printf("\n");
+	// this loop will pass by each letter of textstream
+	while(c != EOF){
+		putchar(c);
+		c = getchar();
+	}
 }
