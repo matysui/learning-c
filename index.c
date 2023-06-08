@@ -1,22 +1,26 @@
 #include <stdio.h>
 
-int power(int m,int n);
+#define LOWER 0
+#define UPPER 300
+#define STEP 20
 
-// test power function
+int celfa(int) ;
+
 int main(){
-	int i ;
 
-	for (i = 0; i < 10; ++i ) {
-		printf("%d %d %d\n",i,power(2,i),power(-3,i)) ;
+	int fahr = LOWER;
+
+	while (fahr <= UPPER) {
+		int c = celfa(fahr);
+
+		printf("%3.0d\t%3.0d\n",fahr,c);
+		fahr += STEP ;
 	}
-	return 0;
 }
-// power : raises base to  n-th power ; n >= 0
-int power(int base,int n) {
-	int i ,p ;
-	p = 1 ;
 
-	for (i = 1;i <= n; ++i)
-		p = p * base ;
-	return p;
+int celfa(int fahr){
+	//(5.0/9.0) * (f-32.0)
+	int celsius = (5.0/9.0) * (fahr - 32.0) ;
+
+	return celsius ;
 }
