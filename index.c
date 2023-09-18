@@ -1,22 +1,24 @@
 #include <stdio.h>
 
-void deletaram(int s[], int c);
-int main()
-{
-	int rato[] = {0,1,1,9,2};
-	int c = 9;
-	deletaram(rato,c);
-	for(int i = 0; i < 5; ++i) {
-		printf("%d\n", rato[i]);
-	}
+void junta();
+
+int main(){
+
+	char uma[] = "pato";
+	char dos[] = "pateta";
+
+	junta(uma,dos);
+
+	printf("%s\n",uma);
+
+
 }
-
- void deletaram(int s[],int c)
-	 {
-		 int i ,j;
-
-		 for (i = j = 0;i < 5;i++){
-			 if(s[i] != c)
-				 s[j++] = s[i];
-		 }
-	 }
+void junta(char s[],char t[])
+{
+	int i,j;
+	i = j = 0;
+	while(s[i] != '\0')/*find end of s*/
+		i++;/*i continue with the same value*/
+	while ((s[i++] = t[j++]) != '\0')/*copy t*/
+		;
+}
