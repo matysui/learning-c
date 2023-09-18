@@ -1,30 +1,21 @@
 #include <stdio.h>
 
-void tira(char s[],int c);
-
+void deletaram(int s[], int c);
 int main()
 {
-	char palur[] = "sakura";
-	char mal = 'a';
-
-	tira(palur,mal);
-
-	printf("%s\n",palur);
-}
-
-void tira(char s[],int c )
-{
-	int j,i;
-
-	for (i= j = 0;s[i] != '\0'; i++)// will run since s[i] is not
-	{
-		if(s[i] != c)// will execute if s[i] is different from c('a')
-			{
-
-			s[j++] = s[i];//each time a non-c occurs, it is copied into the j position.then the string is modified
-
-			}
-	}
-	s[j] = '\0';
+	int rato[] = {0,1,1,9,2};
+	int c = 9;
+	deletaram(rato,c);
+	printf("\n%d\n",rato[3]);
 
 }
+
+ void deletaram(int s[],int c)
+	 {
+		 int i ,j;
+
+		 for (i = j = 0;i < 5;i++){
+			 if(s[i] != c)
+				 s[j++] = s[i];
+		 }
+	 }
