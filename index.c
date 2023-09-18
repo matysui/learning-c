@@ -6,8 +6,9 @@ int main()
 	int rato[] = {0,1,1,9,2};
 	int c = 9;
 	deletaram(rato,c);
-	printf("\n%d\n",rato[3]);
-
+	for(int i = 0; i < 5; ++i) {
+		printf("%d\n", rato[i]);
+	}
 }
 
  void deletaram(int s[],int c)
