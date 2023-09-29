@@ -2,14 +2,17 @@
 
 void junta();
 void putz();
+int any(char s[],char t[]);
+
 int main(){
 
-	char uma[] = "patati";
+	char uma[] = "cenabr";
 	char dos[] = "pateta";
 
-	putz(uma,dos);
-	printf("%s\n",dos);
-
+	int res ;
+	res = any(uma,dos);
+	printf("%d\n",res);
+	return 0;
 
 }
 void junta(char s[],char t[])
@@ -30,4 +33,16 @@ void putz(char s[], char t[]){
 		}
 	}
 	t[j] = '\0';
+}
+
+int any(char s[],char t[]){
+	int i,j;
+	for (i=j=0;s[i] != '\0';i++){
+		if (s[i] == t[i]){
+			return i;
+			break;
+		}
+
+	}
+		return -1;
 }
