@@ -1,41 +1,55 @@
 #include <stdio.h>
 
 int bino(int x,int v[],int n);
+#define MAXLINE 1000
 
+char line[MAXLINE];
+void getLine(void);
+void escapou(char s[],char t[]);
 int main(){
-	int c, i, nwhite, nother,ndigit[10];
-	nwhite = nother = 0;
+	char s[MAXLINE];
+	getLine();
+	escapou(s,line);
 
-	for(i=0;i<10;i++){
-		ndigit[i] =0 ;
-	}
-
-	while ((c = getchar()) != EOF){
-		switch (c) {
-			case '0':case '1': case '2': case '3': case '4':
-			case '5': case '6': case '7': case '8': case '9':
-				ndigit[c-'0']++;/*Ex : 9 = 57 | (57 - 48)= 9 | ndigit[9 + 1]
-								 *a[i]++ increments the element at index i,
-								 *it doesn't increment i. And a[i++] increments i,
-								 *not the element at index i. */
-				break;
-			case ' ':
-			case '\n':
-			case '\t':
-				nwhite++;
-				break;
-			default:
-				nother++;
-				break;
-
-		}
-	}
-	printf("digits = ");
-	for (i=0;i<10;i++) {
-		printf("%d",ndigit[i]);
-	}
-	printf(",ws = %d, other = %d",nwhite,nother);
-
+	printf("%s\n",s);
 	return 0;
 
+}
+
+void escapou(char s[],char t[]){
+	int i,j;
+	i = j = 0;
+	while (t[i] != '\0') {/*In order to do that we need to escape them,the escaping is done by adding \ character*/
+		switch(t[i]){
+			case '\t':
+				s[j++] = '\\';
+				s[j] = 't';
+				break;
+			case '\n':
+				s[j++] = '\\';
+				s[j]= 'n';
+				break;
+			default:
+					s[j] = t[i];
+					break;
+		}
+		++i;
+		++j;
+		
+	}
+}
+
+void getLine(void){ // get line into a string
+	int c,i;
+	extern char line[];
+	i = 0;
+	while((c = getchar()) != EOF && c != '\n'){
+		line[i++] = c;
+	}
+
+	if(c == '\n'){
+		line[i++] = c;
+	}
+
+	line[i] = '\0';
 }
