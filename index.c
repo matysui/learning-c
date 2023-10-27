@@ -1,55 +1,40 @@
 #include <stdio.h>
 
-int bino(int x,int v[],int n);
-#define MAXLINE 1000
+enum {false=0,true=1};
 
-char line[MAXLINE];
-void getLine(void);
-void escapou(char s[],char t[]);
+int espaco(char s);
+int digitu(char s);
+int cotoi(char s[]);
 int main(){
-	char s[MAXLINE];
-	getLine();
-	escapou(s,line);
-
-	printf("%s\n",s);
-	return 0;
-
+	char s[] = "-32";
+	printf("res = %d\n",(cotoi(s) + 30));
 }
 
-void escapou(char s[],char t[]){
-	int i,j;
-	i = j = 0;
-	while (t[i] != '\0') {/*In order to do that we need to escape them,the escaping is done by adding \ character*/
-		switch(t[i]){
-			case '\t':
-				s[j++] = '\\';
-				s[j] = 't';
-				break;
-			case '\n':
-				s[j++] = '\\';
-				s[j]= 'n';
-				break;
-			default:
-					s[j] = t[i];
-					break;
-		}
-		++i;
-		++j;
-		
-	}
+/*covert s to interger: version 2*/
+
+int cotoi(char s[]){
+	int i, n, sign;
+	for (i = 0; espaco(s[i]); i++ )/*skip white space*/
+		;
+	sign = (s[i] == '-') ? -1 : 1;
+	if (s[i] == '+' || s[i] == '-') /*skip sign*/
+		i++;
+	for(n = 0; digitu(s[i]); i++)
+			n = 10 * n +(s[i] - '0');
+	return sign * n;
 }
 
-void getLine(void){ // get line into a string
-	int c,i;
-	extern char line[];
-	i = 0;
-	while((c = getchar()) != EOF && c != '\n'){
-		line[i++] = c;
-	}
 
-	if(c == '\n'){
-		line[i++] = c;
+int espaco(char s){
+	if(s == ' '|| s == '\n' || s == '\t'){
+		return true;
 	}
+	return false;
+}
 
-	line[i] = '\0';
+int digitu(char s){
+	if (s >= '0' && s <= '9'){
+		return true;
+	}
+	return false;
 }
