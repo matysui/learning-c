@@ -1,40 +1,32 @@
 #include <stdio.h>
 
-enum {false=0,true=1};
+void modify(int s[],int n);
 
-int espaco(char s);
-int digitu(char s);
-int cotoi(char s[]);
 int main(){
-	char s[] = "-32";
-	printf("res = %d\n",(cotoi(s) + 30));
-}
-
-/*covert s to interger: version 2*/
-
-int cotoi(char s[]){
-	int i, n, sign;
-	for (i = 0; espaco(s[i]); i++ )/*skip white space*/
-		;
-	sign = (s[i] == '-') ? -1 : 1;
-	if (s[i] == '+' || s[i] == '-') /*skip sign*/
-		i++;
-	for(n = 0; digitu(s[i]); i++)
-			n = 10 * n +(s[i] - '0');
-	return sign * n;
-}
-
-
-int espaco(char s){
-	if(s == ' '|| s == '\n' || s == '\t'){
-		return true;
+	int arr[] = {1,2,3,4,5,6,7,8,9,10};
+	int n = sizeof(arr)/sizeof(arr[0]); // find the array's length
+	modify(arr,n);
+	printf("\n");
+	for(int i = 0;i<n;i++){
+		printf("%d ",arr[i]);
 	}
-	return false;
+	printf("\n");
 }
 
-int digitu(char s){
-	if (s >= '0' && s <= '9'){
-		return true;
+void modify(int arr[],int n){
+	if(n <= 1)
+		return;
+
+	int prev = arr[0];
+	printf("%d x %d",arr[0],arr[1]);
+	arr[0] *= arr[1];
+
+	for(int i=1;i<n-1;i++){
+		int curr = arr[i];
+		printf("|%d x %d ",prev,arr[i+1]);
+		arr[i] = prev * arr[i+1];
+		prev = curr;
 	}
-	return false;
+	printf("|%d x %d ",prev,arr[n-1]);
+	arr[n-1] = prev * arr[n-1];
 }
