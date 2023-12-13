@@ -1,32 +1,26 @@
 #include <stdio.h>
 
-void modify(int s[],int n);
+void arruma(int v[],int );
 
 int main(){
-	int arr[] = {1,2,3,4,5,6,7,8,9,10};
-	int n = sizeof(arr)/sizeof(arr[0]); // find the array's length
-	modify(arr,n);
-	printf("\n");
-	for(int i = 0;i<n;i++){
-		printf("%d ",arr[i]);
-	}
+	int v[] = {3, 4, 2,5, 6, 1};
+	int n = sizeof(v) / sizeof(v[0]);
+
+	arruma(v,n);
+
+	for(int c =0; c < n; c++)
+		printf("%d ",v[c]);
 	printf("\n");
 }
 
-void modify(int arr[],int n){
-	if(n <= 1)
-		return;
+void arruma(int v[], int n){
+	int gap, i, j, temp ;
 
-	int prev = arr[0];
-	printf("%d x %d",arr[0],arr[1]);
-	arr[0] *= arr[1];
-
-	for(int i=1;i<n-1;i++){
-		int curr = arr[i];
-		printf("|%d x %d ",prev,arr[i+1]);
-		arr[i] = prev * arr[i+1];
-		prev = curr;
-	}
-	printf("|%d x %d ",prev,arr[n-1]);
-	arr[n-1] = prev * arr[n-1];
+	for(gap = n/2; gap > 0; gap /= 2)
+		for(i = gap; i < n; i++)
+			for(j = i - gap; j >= 0 && v[j] > v[j + gap]; j -= gap){
+				temp = v[j];
+				v[j] = v[j+gap];
+				v[j + gap] = temp;
+			}
 }
