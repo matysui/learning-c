@@ -1,26 +1,22 @@
 #include <stdio.h>
+#include <string.h>
 
-void arruma(int v[],int );
+void reversar(char v[]);/* reverse string s in place */
 
 int main(){
-	int v[] = {3, 4, 2,5, 6, 1};
-	int n = sizeof(v) / sizeof(v[0]);
-
-	arruma(v,n);
-
-	for(int c =0; c < n; c++)
-		printf("%d ",v[c]);
-	printf("\n");
+	char s[] = "tabu" ;
+	reversar(s);
+	printf("%s\n",s);
 }
 
-void arruma(int v[], int n){
-	int gap, i, j, temp ;
 
-	for(gap = n/2; gap > 0; gap /= 2)
-		for(i = gap; i < n; i++)
-			for(j = i - gap; j >= 0 && v[j] > v[j + gap]; j -= gap){
-				temp = v[j];
-				v[j] = v[j+gap];
-				v[j + gap] = temp;
-			}
+void reversar(char v[]){
+	int c,i,j;
+
+	for ( i = 0, j = strlen(v)-1  ; i < j ; i++, j-- ) {
+		c = v[i], v[i] = v[j], v[j] = c;
+		/*Comma operator should be used  sparingly,the most suitable uses are for constructs stringly related to
+		 * each other and in macros where a multstep computation has to be a single expression.
+		 *or where the exchange can be thought of as a sigle operation. */
+	}
 }
