@@ -1,42 +1,48 @@
 #include <stdio.h>
-#include <string.h>
 
-void reversar(char v[]);/* reverse string s in place */
-void convy(int n,char s[]);
+#define MAXLINE 1000 /*maximum input line length*/
+
+int getLine(char line[], int max);
+int strinDex(char source[],char searchfor[]);
+
+char pattern[] = "ould"; /*pattern to searchfor */
+
+/* find all lines matching pattern */
 int main(){
-	char s[] = "tabu" ;
-	convy(-732,s);
-	printf("\n%s\n",s);
+    char line[MAXLINE];
+    int found = 0;
+
+    while(getLine(line,MAXLINE) > 0)
+        if (strinDex(line,pattern) >= 0) {
+            printf("%s",line);
+            found++;
+        }
+    return found;
 }
 
+/*getLine : get line into s, return lenght*/
+int getLine(char s[], int lim)
+{
+    int c,i;
 
-void reversar(char v[]){
-	int c,i,j;
-
-	for ( i = 0, j = strlen(v)-1  ; i < j ; i++, j-- ) {
-		c = v[i], v[i] = v[j], v[j] = c;
-		/*Comma operator should be used  sparingly,the most suitable uses are for constructs stringly related to
-		 * each other and in macros where a multstep computation has to be a single expression.
-		 *or where the exchange can be thought of as a sigle operation. */
-	}
+    i = 0;
+    while ( --lim > 0 && (c = getchar()) != EOF && c != '\n')
+        s[i++] = c;
+    if (c == '\n')
+        s[i++] = c;
+    s[i] = '\0';
+    return i;
 }
 
-/*convert n to characters in s*/
-void convy(int n,char s[]) { /*converts a number to a character string*/
-	int i,sign;
+/*strinDex : return index of t in s, -1 if none*/
+int strinDex( char source[], char searchfor[]){
+    int i,j,k;
+    for ( i =0; source[i] != '\0'; i++) {
 
-	if ((sign = n) < 0) /*record sign*/
-		n = -n;         /*make n positive*/
+        for (j = i,k = 0; searchfor[k] != '\0' && source[j] == searchfor[k]; j++, k++) /*compare each letter by incrementing k and j*/
 
-	i = 0;
-
-	do /*generate digits in reverse order*/
-	{s[i++] = n % 10 + '0';/*get next digit*/
-	} while((n/=10) > 0); /*delete it*/
-
-	if(sign < 0)
-		s[i++] = '-';
-
-	s[i] = '\0';
-	reversar(s);
+        if (k > 0 && searchfor[k] == '\0')
+            return i;
+    }
+    return -1;
 }
