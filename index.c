@@ -1,48 +1,47 @@
 #include <stdio.h>
 
-#define MAXLINE 1000 /*maximum input line length*/
+int strLen( char string[] );
+int trim (char string[] );
+void getLine( char s[] );
 
-int getLine(char line[], int max);
-int strinDex(char source[],char searchfor[]);
 
-char pattern[] = "ould"; /*pattern to searchfor */
-
-/* find all lines matching pattern */
 int main(){
-    char line[MAXLINE];
-    int found = 0;
-
-    while(getLine(line,MAXLINE) > 0)
-        if (strinDex(line,pattern) >= 0) {
-            printf("%s",line);
-            found++;
-        }
-    return found;
+    char s[1000] = " ";
+    getLine(s);
+    trim(s);
+    printf("%d\n",strLen(s));
 }
 
-/*getLine : get line into s, return lenght*/
-int getLine(char s[], int lim)
-{
-    int c,i;
 
-    i = 0;
-    while ( --lim > 0 && (c = getchar()) != EOF && c != '\n')
-        s[i++] = c;
-    if (c == '\n')
-        s[i++] = c;
-    s[i] = '\0';
-    return i;
-}
-
-/*strinDex : return index of t in s, -1 if none*/
-int strinDex( char source[], char searchfor[]){
-    int i,j,k;
-    for ( i =0; source[i] != '\0'; i++) {
-
-        for (j = i,k = 0; searchfor[k] != '\0' && source[j] == searchfor[k]; j++, k++) /*compare each letter by incrementing k and j*/
-
-        if (k > 0 && searchfor[k] == '\0')
-            return i;
+/* trim:  remove trailing blanks, tabs, newlines from the end of the string*/
+int trim (char s[]){
+    int n;
+    for (n = strLen(s)-1; n >= 0; n--){
+        if (s[n] != ' ' && s[n] != '\t' && s[n] != '\n' ) /*identifies non-whitespace*/
+            break ;
     }
-    return -1;
+    s[n+1] = '\0'; /* cut the array */
+    return n;
+
+}
+
+int strLen(char t[]){
+    int i ;
+    for (i = 0; t[i] != '\0' ; i++ )
+        ;
+    if (i > 0) { return i;}
+    else {return -1;}
+}
+
+void getLine( char s[]) {
+    int c, i=0 ;
+
+    while((c = getchar()) != EOF && c != '\n'){
+        s[i++] = c;
+    }
+    if (c == '\n') {
+        s[i++] = c;
+    }
+
+    s[i] = '\0';
 }
