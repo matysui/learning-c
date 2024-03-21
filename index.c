@@ -8,9 +8,56 @@ int isSpace(char s);
 int isDigit(char s);
 void reversar(char v[]);
 void strCat(char s[], char t[]);
+int binsearch(int x, int v[],int n);
+void sort(int v[],int s);
+
 
 int main(){
+
+    int v[] = {30,6,12,9,15,33,60,75};
+
+    sort(v,8);
+
+    for (int i = 0; i < 8; i++)
+        printf("%d, ",v[i]);
+    printf("\n");
 }
+
+
+
+void sort(int v[], int n){
+
+    int gap, i, j, temp;
+
+    for(gap = n/2 ; gap > 0 ; gap /= 2)
+        for(i = gap; i < n; i++)
+            for( j = i - gap; j >= 0 && v[j] > v[j + gap]; j = j - gap)
+                temp = v[j], v[j] = v[j+gap], v[j + gap] = temp;
+}
+
+
+
+
+
+
+
+int binsearch(int x, int v[], int n){
+    int low, mid,high;
+    low = 0;
+    high = n-1; /* n -1 because the user will say how many elements exists in the list*/
+    while (low <= high) {
+       mid = (low + high) / 2;
+
+       if (x < v[mid])
+           high = mid - 1;
+       else if (x > v[mid])
+           low = mid + 1;
+       else
+           return mid;
+    }
+    return -1 ;
+}
+
 
 /* strcat:  concatenate t to end of s; s must be big enough */
 void strCat(char s[], char t[]){
