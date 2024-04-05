@@ -25,7 +25,7 @@ int main(){
 
 
 
-void sort(int v[], int n){
+void sort(int v[], int n){ //ok
 
     int gap, i, j, temp;
 
